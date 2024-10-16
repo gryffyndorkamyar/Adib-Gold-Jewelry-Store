@@ -1,0 +1,491 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <title>{% block title %}{% endblock title %}</title>
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Riode - Ultimate eCommerce Template">
+    <meta name="author" content="D-THEMES">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/icons/favicon.png">
+    <!-- Preload Font -->
+    <link rel="preload" href="{% static "fonts/riode.ttf" %}" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="{% static "vendor/fontawesome-free/webfonts/fa-solid-900.woff2" %}" as="font" type="font/woff2"
+          crossorigin="anonymous">
+    <link rel="preload" href="{% static "vendor/fontawesome-free/webfonts/fa-brands-400.woff2" %}" as="font" type="font/woff2"
+          crossorigin="anonymous">
+    <script>
+        WebFontConfig = {
+            google: { families: ['vazir:400,500,600,700,800,900'] }
+        };
+        (function (d) {
+            var wf = d.createElement('script'), s = d.scripts[0];
+            wf.src = "js/webfont.js";
+            wf.async = true;
+            s.parentNode.insertBefore(wf, s);
+        })(document);
+    </script>
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/fontawesome-free/css/all.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/animate/animate.min.css" %}">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/magnific-popup/magnific-popup.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/owl-carousel/owl.carousel.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/sticky-icon/stickyicon.css" %}">
+    <!-- Font Vazir -->
+    <link href="{% static "fonts/vazir/font-vazir.css" %}" rel="stylesheet" />
+    <!-- Main CSS File -->
+    <link rel="stylesheet" type="text/css" href="{% static "css/demo3.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/style.min.css" %}">
+</head>
+
+<body class="home">
+    <div class="page-wrapper">
+        <h1 class="d-none"> فروشگاه ادیب گلد </h1>
+        <header class="header rtl text-right">
+            <div class="header-top">
+                <div class="container">
+                    <div class="header-right">
+                        <p class="welcome-msg">به وبسایت ادیب گلد خوش آمدید</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- End HeaderTop -->
+            <div class="header-middle sticky-header fix-top sticky-content">
+                <div class="container">
+                    <div class="header-right">
+                        <a href="#" class="mobile-menu-toggle">
+                            <i class="d-icon-bars2"></i>
+                        </a>
+                       
+                        <!-- End Logo -->
+                        <div class="header-search hs-simple">
+                            <form action="{% url "shop:home" %}" class="input-wrapper">
+                                <input type="text" class="form-control" name="q" autocomplete="off"
+                                       placeholder="جستجو ..." required />
+                                <button class="btn btn-search" type="submit">
+                                    <i class="d-icon-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <!-- End Header Search -->
+                    </div>
+                    <div class="header-left ">
+                        <a href="tel:#" class="icon-box icon-box-side">
+                            <div class="icon-box-icon mr-0 mr-lg-2">
+                                <i class="d-icon-phone"></i>
+                            </div>
+                            <div class="icon-box-content d-lg-show">
+                                <h4 class="icon-box-title"> تلفن پاسخگو:</h4>
+                                <p> 09112345678 </p>
+                            </div>
+                        </a>
+                        <span class="divider"></span>
+                        
+                        
+                        <div class="dropdown cart-dropdown type2 off-canvas mr-0 mr-lg-2">
+                            <a href="#" class="cart-toggle label-block link">
+                                <div class="cart-label d-lg-show">
+                                    <span class="cart-name">سبد خرید</span>
+                                    
+                                    
+                                </div>
+                                <i class="d-icon-bag"><span class="cart-count">{{ cart|length }}</span></i>
+                            </a>
+                            <div class="canvas-overlay"></div>
+                            <!-- End Cart Toggle -->
+                            <div class="dropdown-box">
+                                <div class="canvas-header">
+                                    <h4 class="canvas-title">سبد خرید</h4>
+                                    <a href="#" class="btn btn-dark btn-link btn-icon-right  btn-close">
+                                        بستن<i class="d-icon-arrow-left"></i>
+                                    </a>
+                                </div>
+                                <div class="products scrollable">
+                                    {% for item in cart %}
+                                    <div class="product product-cart">
+                                        <figure class="product-media">
+                                            <a href="{{ item.product_obj.get_absolute_url }}">
+                                                <img src="{{ item.product_obj.images.first.file.url }}" alt="product" width="80"
+                                                     height="88" />
+                                            </a>
+                                            <a href="{% url "cart:cart_remove" item.product_obj.id %}">
+                                            <button class="btn btn-link btn-close">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </a>
+                                        </figure>
+                                        <div class="product-detail">
+                                            <a href="{{ item.product_obj.get_absolute_url }}" class="product-name">{{ item.product_obj.title }}</a>
+                                            <div class="price-box">
+
+                                                <span class="product-price"> {{ item.product_obj.new_price }} تومان </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End of Cart Product -->
+                                    {% endfor %}
+                                    
+                                    
+                                </div>
+                                <!-- End of Products  -->
+                                <div class="cart-total">
+                                    <label>جمع کل:</label>
+                                    <span class="price">{{ cart.get_total_price|intcomma:False }} تومان</span>
+                                </div>
+                                <!-- End of Cart Total -->
+                                <div class="cart-action">
+                                    <a href="{% url "cart:cart_detail" %}" class="btn btn-dark btn-link">نمایش خرید </a>
+                                    <a href="#" class="btn btn-dark"><span>پرداخت</span></a>
+                                </div>
+                                <!-- End of Cart Action -->
+                            </div>
+                            <!-- End Dropdown Box -->
+                        </div>
+                        <div class="header-search hs-toggle mobile-search">
+                            <a href="#" class="search-toggle">
+                                <i class="d-icon-search"></i>
+                            </a>
+                            <form action="{% url "shop:home" %}" class="input-wrapper">
+                                <input type="text" class="form-control" name="q" autocomplete="off"
+                                       placeholder="جستجو ..." required />
+                                <button class="btn btn-search" type="submit">
+                                    <i class="d-icon-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <!-- End of Header Search -->
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="header-bottom d-lg-show w-100">
+                    <div class="header-right">
+                        <nav class="main-nav">
+                            <ul class="menu">
+                                <li>
+                                    <a href="{% url "shop:home" %}">صفحه نخست</a>
+                                </li>
+                               
+                                
+                                
+                                {% if user.is_authenticated %}
+                                <li class="d-xl-show submenu submenu-container">
+                                    <a href="#">{{ user.username }}</a>
+                                    <div class="megamenu">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                
+                                                <ul>
+                                                    <li><a href="{% url "logout" %}">خروج</a></li>
+                                                    
+                                                </ul>
+                                            </div>
+                                           
+                                            
+                                            
+                                        </div>
+
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <a href="{% url "orders:order_list" %}">سفارشات</a>
+                                </li>
+                                {% endif %}
+                                
+                                <li>
+                                    {% if user.is_authenticated %}
+                                    <a href="{% url "logout" %}">خروج</a>
+                                    {% else %}
+                                    <a href="{% url "login" %}">ورود</a>
+                                    <li>
+                                        <a href="{% url "signup" %}"> ثبت نام</a>
+                                    </li>
+                                    {% endif %}
+                                   
+                                </li>
+                                <li>
+                                    <a href="{% url "shop:about_us" %}">درباره ما</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="header-left ">
+                        <a href="#">
+                            پیشنهاد زمان محدود
+                        </a>
+                        <a href="#" class="mr-6">
+                            خرید من !
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End Header -->
+      
+        {% block content %}
+        
+        {% endblock content %}
+
+        <footer class="footer appear-animate rtl text-right" data-animation-options="{'name': 'fadeIn', 'duration': '1s'}">
+            <div class="container">
+                
+                <!-- End FooterTop -->
+                <div class="footer-middle">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="widget widget-info">
+                                <h4 class="widget-title">اطلاعات تماس</h4>
+                                <ul class="widget-body ">
+                                    <li>
+                                        <label>گروه مدیریت: موسس  شعبه سام سنتر :</label>
+                                        <a href="#"> ادیب حافظی </a>
+                                    </li>
+                                    <li>
+                                        <label>توسعه دهنده خدمات آنلاین و وبسایت</label>
+                                        <a href="#">کامیار جعفریان </a>
+                                    </li>
+                                    <li>
+                                        <label>آدرس :</label>
+                                        <a href="#">تهران ، </a>
+                                    </li>
+                                    <li>
+                                        <label>روز و ساعت کاری:</label>
+                                    </li>
+                                    <li>
+                                        <a href="#"> شنبه تا پنج شنبه/ 9:00 صبح تا 8:00 شب</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- End Widget -->
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="widget ml-lg-4">
+                                <h4 class="widget-title">  حساب کاربری من</h4>
+                                <ul class="widget-body ">
+                                    <li>
+                                        <a href="about-us.html">درباره ما</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"> تاریخ چه سفارشات</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">مرجوعی</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">خدمات سفارشی</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">شرایط</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- End Widget -->
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="widget ml-lg-4">
+                                <h4 class="widget-title">اطلاعات وبسایت</h4>
+                                <ul class="widget-body ">
+                                    <li>
+                                        <a href="{% url "login" %}">ورود</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url "cart:cart_detail" %}">نمایش خرید </a>
+                                    </li>
+                                   
+                                    <li>
+                                        {% if user.is_authenticated %}
+                                        <a href="{% url "orders:order_list" %}"> سفارش من را پیگیری کنید</a>
+                                        {% endif %}
+                                    </li>
+                                   
+                                </ul>
+                            </div>
+                            <!-- End Widget -->
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- End FooterMiddle -->
+                <div class="footer-bottom">
+                    <div class="footer-right">
+                        
+                    </div>
+                    <div class="footer-center">
+                        <p class="copyright"> فروشگاه   ادیب گلد 1402 &copy;  کلیه حقوق محفوظ است .</p>
+                    </div>
+                    <div class="footer-left ">
+                        <div class="social-links">
+                            <a href="#" title="social-link" class="social-link social-facebook fab fa-facebook-f"></a>
+                            <a href="#" title="social-link" class="social-link social-twitter fab fa-twitter"></a>
+                            <a href="#" title="social-link" class="social-link social-linkedin fab fa-linkedin-in"></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End FooterBottom -->
+            </div>
+        </footer>
+        <!-- End Footer -->
+    </div>
+    <!-- Sticky Footer -->
+    <div class="sticky-footer sticky-content fix-bottom rtl text-right">
+        <a href="{% url "shop:home" %}" class="sticky-link">
+            <i class="d-icon-home"></i>
+            <span>صفحه نخست</span>
+        </a>
+        
+        {% if user.is_authenticated %}
+        <a href="#" class="sticky-link">
+            <i class="d-icon-user"></i>
+            <span>{{ user.username }}</span>
+        </a>
+        {% endif %}
+        
+        <div class="header-search hs-toggle dir-up">
+            <a href="#" class="search-toggle sticky-link">
+                <i class="d-icon-search"></i>
+                <span>جستجو</span>
+            </a>
+            <form action="{% url "shop:home" %}" class="input-wrapper">
+                <input type="text" class="form-control" name="q" autocomplete="off"
+                    placeholder="جستجو ..." required />
+                <button class="btn btn-search" type="submit" title="submit-button">
+                    <i class="d-icon-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+    <!-- Scroll Top -->
+    <a id="scroll-top" href="#top" title="Top" role="button" class="scroll-top"><i class="d-icon-arrow-up"></i></a>
+    <!-- MobileMenu -->
+    <div class="mobile-menu-wrapper">
+        <div class="mobile-menu-overlay">
+        </div>
+        <!-- End of Overlay -->
+        <a class="mobile-menu-close" href="#"><i class="d-icon-times"></i></a>
+        <!-- End of CloseButton -->
+        <div class="mobile-menu-container scrollable">
+            <form action="{% url "shop:home" %}" class="input-wrapper">
+                <input type="text" class="form-control" name="q" autocomplete="off"
+                       placeholder="جستجو ..." required />
+                <button class="btn btn-search" type="submit" title="submit-button">
+                    <i class="d-icon-search"></i>
+                </button>
+            </form>
+            <!-- End of Search Form -->
+            <ul class="mobile-menu mmenu-anim">
+               
+                
+                
+
+                {% if user.is_authenticated %}
+                
+                <li>
+                    
+                    <a href="#">{{ user.username }}</a>
+                   
+                    <ul>
+                        
+                        
+                        <li>
+                            <a href="{% url "logout" %}">خروج</a>
+                            <ul>
+                                <li><a href="product-sale.html">شمارش معکوس فروش</a></li>
+                                <li><a href="product-hurryup.html">نوتیفیکیشن آخرین فرصت</a></li>
+                                <li><a href="product-attribute-guide.html">با راهنمای اندازه</a></li>
+                                <li><a href="product-sticky-cart.html">اضافه به خرید چسبیده</a></li>
+                                <li><a href="product-thumbnail-label.html">برچسب روی تصویر</a></li>
+                                
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="{% url "orders:order_list" %}">سفارشات</a>
+                </li>
+                {% else %}
+
+                <li><a href="{% url "login" %}">ورود</a></li>
+                <li><a href="{% url "signup" %}">ثبت نام </a></li>
+                {% endif %}
+
+               
+                <li>
+                    <a href="#">وبلاگ</a>
+                    <ul>
+                        <li><a href="blog-classic.html">کلاسیک</a></li>
+                        <li><a href="blog-listing.html">وبلاگ لیست وار</a></li>
+                        <li>
+                            <a href="#">گرید وبلاگ</a>
+                            <ul>
+                                <li><a href="blog-grid-2col.html">وبلاگ  2 ستونه</a></li>
+                                <li><a href="blog-grid-3col.html">وبلاگ  3 ستونه</a></li>
+                                <li><a href="blog-grid-4col.html">وبلاگ  4 ستونه</a></li>
+                                <li><a href="blog-grid-sidebar.html">وبلاگ با سایدبار</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">کاشی کاری</a>
+                            <ul>
+                                <li><a href="blog-masonry-2col.html">کاشی کاری 2 ستونه</a></li>
+                                <li><a href="blog-masonry-3col.html">کاشی کاری 3 ستونه</a></li>
+                                <li><a href="blog-masonry-4col.html">کاشی کاری 4 ستونه</a></li>
+                                <li><a href="blog-masonry-sidebar.html">کاشی کاری با سایدبار( نوار جانبی )</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">متن روی تصویر</a>
+                            <ul>
+                                <li><a href="blog-mask-grid.html">متن روی تصویر درگرید</a></li>
+                                <li><a href="blog-mask-masonry.html">متن روی تصویر در کاشی کاری</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="post-single.html">پست تکی</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li><a href="{% url "shop:about_us" %}">درباره ما </a></li>
+            </ul>
+            <!-- End of MobileMenu -->
+        </div>
+    </div>
+   
+    <!-- sticky icons-->
+	<div class="sticky-icons-wrapper rtl">
+		<div class="sticky-icon-links">
+			<ul>
+				<li><a href="{% url "shop:home" %}" class=""><i class="fas fa-home"></i><span>خانه</span></a></li>
+				
+				
+				<li><a href="{% url "cart:cart_detail" %}"><i class="fas fa-shopping-cart"></i><span>خرید
+							!</span></a></li>
+			</ul>
+		</div>
+		<div class="demos-list">
+			<div class="demos-overlay"></div>
+			<a class="demos-close" href="#"><i class="close-icon"></i></a>
+			<div class="demos-content scrollable scrollable-light">
+				<h3 class="demos-title">دموها</h3>
+				<div class="demos">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Plugins JS File -->
+    <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
+    <script src="{% static "vendor/imagesloaded/imagesloaded.pkgd.min.js" %}"></script>
+    <script src="{% static "vendor/elevatezoom/jquery.elevatezoom.min.js" %}"></script>
+    <script src="{% static "vendor/magnific-popup/jquery.magnific-popup.min.js" %}"></script>
+    <script src="{% static "vendor/owl-carousel/owl.carousel.min.js" %}"></script>
+    <script src="{% static "vendor/sticky/sticky.min.js" %}"></script>
+    <!-- Main JS File -->
+    <script src="{% static "js/main.min.js" %}"></script>
+</body>
+</html>

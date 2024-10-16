@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} درباره ما {% endblock title %}
+
+{% block content %}
+
+<main class="main rtl text-right">
+    <nav class="breadcrumb-nav">
+        <div class="container">
+            <ul class="breadcrumb ">
+                <li><a href="{% url "shop:home" %}"><i class="d-icon-home"></i></a></li>
+                <li>درباره ما</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="page-header pl-4 pr-4" style="background-image: url('{% static "images/page-header/about-us.jpg" %}')">
+        <h3 class="page-subtitle font-weight-bold">به طلا فروشی ادیب خوش آمدید</h3>
+        <h1 class="page-title font-weight-bold lh-1 text-white text-capitalize">درباره ما</h1>
+        <p class="page-desc text-white mb-0">
+            در زیر اطلاعاتی در مورد خدمات سایت خواهید داشت <br>
+
+        </p>
+    </div>
+    <div class="page-content mt-10 pt-10">
+        <section class="about-section pb-10 appear-animate">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 mb-10 mb-lg-4 ">
+                        <h5 class="section-subtitle lh-2 ls-md font-weight-normal">01. کارهایی که ما انجام می دهیم </h5>
+                        <h3 class="section-title lh-1 font-weight-bold">
+                            ارائه آمار کامل و کاربردی
+                        </h3>
+                        <p class="section-desc">
+                            آمار پیشرفت وبسایت  و آمار خدمات و مشتریان ما .
+                        </p>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <div class="counter text-center text-dark">
+                                    <span class="count-to" data-fromvalue="0" data-tovalue="34"
+                                          data-duration="900" data-delimiter=",">2</span>
+                                    <h5 class="count-title font-weight-bold text-body ls-md">سال تجاری</h5>
+                                    <p class="text-grey mb-0">
+                                       در خدمت شما هستیم<br>
+                                      وازاینکه ما را انتخاب کردید متشکریم . 
+                                    </p>
+                                </div>
+                            </div>
+
+                            
+                            <div class="col-md-4 mb-4 ">
+                                <div class="counter text-center text-dark">
+                                    <span class="count-to" data-fromvalue="0" data-tovalue="130"
+                                          data-duration="900" data-delimiter=",">100</span>
+                                    <h5 class="count-title font-weight-bold text-body ls-md">اعضا تیم</h5>
+                                    <p class="text-grey mb-0">
+                                        آمار تعداد اعضا تیم <br>
+                                        شامل اعضا اصلی و فرعی است .
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- End About Section-->
+        <section class="customer-section pb-10 appear-animate">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-7 mb-4 ">
+                        <figure>
+                            <img src="{% static "images/demo3/products/id7.jpeg" %}" alt="Happy Customer" width="580"
+                                 height="507" class="banner-radius" style="background-color: #BDD0DE;" />
+                        </figure>
+                    </div>
+                    <div class="col-md-5 mb-4  text-right">
+                        <h5 class="section-subtitle lh-2 ls-md font-weight-normal">02. مشتری مداری </h5>
+                        <h3 class="section-title font-weight-bold">
+                            ارائه بروزترین <br>
+                             محصولات 
+                        </h3>
+                        <p class="section-desc text-grey">
+                            ادیب گلد همواره پیشینه پرافتخارش را با طرح های نوین و به روز جهان چنان پیوند داده است که آمیزه ای بی بدیل از مولفه های نمادین دیروز ایران با طرح های مدرن و به روز متعلق به فردای جهان پدید آید. بدین ترتیب محصولات ادیب گلد همچنانکه ریشه های ایرانی خود را آشکار می سازند، از برندهای روز و پیشرو صنعت جواهرسازی جهان نیز الهام می گیرند تا درنهایت مرزهای تاریخی و جغرافیایی را در نوردند .<br>
+                            
+گستره فعالیت ها: فعالیت ادیب گلد در عرصه تجارت جواهرآلات محصولات متنوع و گسترده ای را (از قبیل انواع دستبند، گردنبند، انگشتر، گوشواره، پابند، آویز ساعت و سنجاق سینه) پوشش می دهد.گالری ادیب گلد برای سهولت در دسترسی به فروشگاه های عرضه محصولات و رفاه حال بیشتر مشتریان گرامی اش اقدام به تاسیس شعبه در مرکز تجاری سام سنتر نمود . در سال 1402 با راه اندازی سایت اینترنتی خود، به عرضه آنلاین محصولات طلا و ارایه خدمات اینترنتی زیورآلات نیز مبادرت نموده است. این موضوع در کنار خدمات پستی پیشرفته ادیب گلد این امکان را فراهم آورده است که در کوتاه ترین زمان ممکن بتوان جواهر محبوب خود را در هر نقطه از کشور در اختیار داشت.<br>
+
+چشم انداز: با توجه به افزایش توانایی های سخت افزاری و تجهیز به روز ادوات تولید در کنار توسعه فعالیت های خلاقه استودیوی طراحی این مجموعه، انتظار می رود با دستیابی به سهم بیشتر بازار داخلی در سالهای آینده امکان رهبری ایده برای رقبا یا عرضه محصول و توسعه خدمات به سراسر ایران تا رقابت با برندهای معتبر بین المللی منطقه در دستور کار قرار گیرد. ما همچنان به تلاش خود در جهت ارتقای خدمات به مشتریانمان ادامه می دهیم چرا که معتقدیم آنان شایستگی بهترین را دارند و در این مسیر به ما کمک می کنند.  
+                            
+                        </p>
+                        <a href="{% url "shop:home" %}" class="btn btn-dark btn-link btn-underline ls-m">
+                           از فروشگاه  ما دیدن کنید <i class="d-icon-arrow-left"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- End Customer Section -->
+        <section class="store-section pb-10 appear-animate">
+            <div class="container">
+                <div class="row align-items-center ">
+                    <div class="col-md-6 order-md-first mb-4 text-right">
+                        <h5 class="section-subtitle lh-2 ls-md font-weight-normal mb-1">03.فروشگاه  ما</h5>
+                        <h3 class="section-title font-weight-bold"> پشتیبانی شبانه روزی و<br>راهنمایی محصول</h3>
+                        <p class="section-desc text-grey">
+                            حاظر افراد زیادی از این محصول استفاده میکنند.<br>
+                            صفحه ساز و تعداد آن روز به روز بیشتر می شود.<br>
+                            توسعه فناوری، الزامات در حال   وبسایت ما آورده آماده به کاره.
+                        </p>
+                        <a href="#" class="btn btn-dark btn-link btn-underline ls-m">
+                            از فروشگاه  ما دیدن کنید <i class="d-icon-arrow-left"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-6 mb-4 ">
+                        <figure>
+                            <img src="{% static "images/demo3/products/id3.jpeg" %}" alt="Our Store" width="580" height="507"
+                                 class="banner-radius" style="background-color: #DEE6E8;" />
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Store-section -->
+        
+    </div>
+</main>
+<!-- End Main -->
+
+
+{% endblock content %}

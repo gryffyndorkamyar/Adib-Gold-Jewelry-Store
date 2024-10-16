@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %} سبد خرید {% endblock title %}
+{% block content %}
+
+{% if cart %}
+<main class="main cart rtl text-right">
+    <div class="page-content pt-7 pb-10">
+        <div class="step-by pr-4 pl-4">
+            <h3 class="title title-simple title-step"><a href="cart.html">1. سبد خرید</a></h3>
+            
+        </div>
+        <div class="container mt-7 mb-2">
+            <div class="row">
+                <div class="col-lg-8 col-md-12 pr-lg-4">
+                    <table class="shop-table cart-table">
+                        <thead>
+                            <tr>
+                                <th><span>محصول</span></th>
+                                
+                                <th>نام محصول</th>
+                                <th><span> قیمت واحد</span></th>
+                                <th><span>تعداد</span></th>
+                                <th>مجموع</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for item in cart %}
+                            <tr>
+                                <td class="product-thumbnail">
+                                    <figure>
+                                        <a href="{{ item.product_obj.get_absolute_url }}">
+                                            <img src="{{ item.product_obj.images.first.file.url }}" width="100" height="100"
+                                                 alt="product">
+                                        </a>
+                                    </figure>
+                                </td>
+                                <td class="product-name">
+                                    <div class="product-name-section">
+                                        <a href="{{ item.product_obj.get_absolute_url }}">{{ item.product_obj.title }}</a>
+                                    </div>
+                                </td>
+                                <td class="product-subtotal">
+                                    <span class="amount">{{ item.product_obj.new_price|intcomma:False }} تومان</span>
+                                </td>
+                                <td class="product-quantity">
+                                    <div class="input-group">
+                                        
+                                        <p class="quantity form-control" >{{ item.quantity }}</p>
+                                        
+                                    </div>
+                                </td>
+                                <td class="product-price">
+                                    <span class="amount">{{ item.total_price|intcomma:False }} تومان</span>
+                                </td>
+                                <td class="product-close">
+                                    <a href="{% url "cart:cart_remove" item.product_obj.id %}" class="product-remove" title="حذف محصول">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                    {% endfor %}
+                            
+
+                            <tr>
+                               
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="cart-actions mb-6 pt-4">
+                        <a href="{% url "cart:cart_clear" %}" class="btn btn-dark btn-md btn-rounded btn-icon-left ml-4 mb-4">
+                            خالی کردن سبد خرید <i class="d-icon-arrow-left"></i>
+                        </a>
+
+                        <a href="{% url "shop:home" %}" class="btn btn-dark btn-md btn-rounded btn-icon-left ml-4 mb-4">
+                            ادامه خرید <i class="d-icon-arrow-left"></i>
+                        </a>
+                        
+                    </div>
+
+                    
+                </div>
+                <aside class="col-lg-4 sticky-sidebar-wrapper">
+                    <div class="sticky-sidebar" data-sticky-options="{'bottom': 20}">
+                        <div class="summary mb-4">
+                            
+                            <table class="shipping">
+                                <tr class="summary-subtotal">
+                                   
+                                </tr>
+
+                                
+                            </table>
+                            
+                            <table class="total">
+                                <tr class="summary-subtotal">
+                                    <td>
+                                        <h4 class="summary-subtitle">جمع کل </h4>
+                                    </td>
+                                    <td>
+                                        <p class="summary-total-price ls-s">{{ cart.get_total_price|intcomma:False }} تومان</p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <a href="{% url "orders:order_create" %}" class="btn btn-dark btn-rounded btn-checkout">
+                                پرداخت 
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% else %}
+<main class="main cart-page rtl text-right">
+    <nav class="breadcrumb-nav">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="#"><i class="d-icon-home"></i></a></li>
+                <li>سبد خرید خالی</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="page-content cart-empty">
+        <div class="container">
+            <div class="main-content">
+                <i class="d-icon-bag cart-icon"></i>
+                <h2 class="cart-descri">هیچ محصولی به سبد خرید اضافه نشده است</h2>
+                <a class="btn btn-primary btn-rounded" href="{% url "shop:home" %}">
+                    تکمیل خرید
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- End of Main -->
+{% endif %}
+
+
+
+{% endblock content %}

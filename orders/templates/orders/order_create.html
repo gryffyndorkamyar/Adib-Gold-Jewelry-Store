@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}ثبت سفارش {% endblock title %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+
+<main class="main checkout rtl text-right">
+  <div class="page-content pt-7 pb-10 mb-10">
+    <div class="step-by pr-4 pl-4">
+      
+      <h3 class="title title-simple title-step "><a href="checkout.html"> صورت حساب</a></h3>
+      
+    </div>
+    <div class="container mt-7">
+      <div class="card accordion">
+       
+        
+      </div>
+      
+      <form action="#" class="form" method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-lg-7 mb-6 mb-lg-0 pr-lg-4">
+            <h3 class="title title-simple text-uppercase">جزئیات صورتحساب</h3>
+          {{form.errors}}
+            {{ form }}
+
+          </div>
+          <aside class="col-lg-5 sticky-sidebar-wrapper">
+            <div class="sticky-sidebar mt-1" data-sticky-options="{'bottom': 50}">
+              <div class="summary pt-5">
+                <h3 class="title title-simple text-uppercase">سفارش شما</h3>
+                <table class="order-table">
+                  <thead>
+                    <tr>
+                      <th>محصول</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {% for item in cart %}
+                    <tr>
+                      <td class="product-name">
+                        {{ item.product_obj.title }}<span class="product-quantity">×&nbsp;{{ item.quantity }}</span>
+                      </td>
+                      <td class="product-total text-body">{{ item.total_price|intcomma:False }} تومان</td>
+                    </tr>
+                    {% endfor %}
+                    
+                    
+                    <tr class="summary-subtotal">
+                      <td>
+                        <h4 class="summary-subtitle">جمع کل </h4>
+                      </td>
+                      <td class="summary-subtotal-price pb-0 pt-0">
+                        {{ cart.get_total_price|intcomma:False }} تومان
+                      </td>
+                    </tr>
+                   
+                  </tbody>
+                </table>
+
+                
+               
+                <button type="submit" class="btn btn-dark btn-rounded btn-order">
+                  ثبت سفارش
+                </button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+<!-- End Main -->
+
+
+{% endblock content %}

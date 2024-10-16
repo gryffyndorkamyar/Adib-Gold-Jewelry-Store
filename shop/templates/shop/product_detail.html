@@ -1,0 +1,470 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% load humanize %}
+{% block title %}{{ product.title }}{% endblock title %}
+{% block content %}
+
+<main class="main mt-6 single-product rtl text-right">
+    <div class="page-content mb-10 pb-9">
+        <div class="container">
+
+        
+            
+            <div class="product product-single row mb-8">
+
+                <div class="col-md-6">
+                    <div class="product-gallery">
+                        <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1 ltr">
+                            {% for img in product.images.all %}
+                            <figure class="product-image">
+                                <img src="{{ img.file.url }}"
+                                     
+                                     alt="{{ imf.title }}" width="800" height="900"
+                                     style="background-color: #f5f5f5;" />
+                            </figure>
+                            {% endfor %}
+                            
+
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+
+                
+
+                <div class="col-md-6">
+                    <div class="product-details  product-gallery-sticky">
+                        <div class="product-navigation">
+                            <ul class="breadcrumb breadcrumb-lg">
+                                <li><a href="{% url "shop:home" %}"><i class="d-icon-home"></i></a></li>
+                                <li><a href="#" class="active">محصول</a></li>
+                                <li>{{ product.title }}</li>
+                            </ul>
+                            
+                        </div>
+                        <h1 class="product-name">{{ product.title }}</h1>
+                        <div class="product-meta">
+                            کد کالا :<span class="product-sku">456-9871</span>
+                            دسته بندی :<span class="product-brand">{{ product.category }}</span>
+                        </div>
+                        <div class="product-price">{{ product.new_price|intcomma:False }} تومان</div>
+                        
+                        <p class="product-short-desc">{{ product.description }}
+                        </p>
+                        
+                        
+                       
+                        <hr class="product-divider">
+                        <div class="product-form product-qty">
+                            <form method="post" action="{% url "cart:cart_add" product.id %}">
+                                {% csrf_token %}
+                            <div class="product-form-group">
+                                <div class="input-group ml-2">
+                                    
+                                    {{ add_to_cart_form.quantity|attr:"class:quantity form-control" }}
+                                    
+                                </div>
+                                <button type="" class="btn-cart btn-product  ls-normal ">
+                                    <i class="d-icon-bag"></i>افزودن به سبد 
+                                    خرید
+                                </button>
+                            </div>
+                            
+                        </form>
+
+                        </div>
+
+                   
+                        <hr class="product-divider mb-3">
+                        <div class="product-footer">
+                            <div class="social-links ml-4">
+                                <a href="#" class="social-link social-facebook fab fa-facebook-f"></a>
+                                <a href="#" class="social-link social-twitter fab fa-twitter"></a>
+                                <a href="#" class="social-link social-pinterest fab fa-pinterest-p"></a>
+                            </div>
+                            <hr class="divider d-lg-show">
+                            <div class="product-action">
+                                <a href="#" class="btn-product btn-wishlist ml-6">
+                                    <i class="d-icon-heart"></i> علاقه مندی
+                                </a>
+                                <a href="#" class="btn-product btn-compare">
+                                    <i class="d-icon-compare"></i>اضافه
+                                    مقایسه ها
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+
+            </div>
+
+        
+
+            <div class="tab tab-nav-simple product-tabs mb-5">
+                <ul class="nav nav-tabs justify-content-center" role="tablist">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#product-tab-additional">اطلاعات بیشتر</a>
+                    </li>
+                    
+                   
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active in mb-3" id="product-tab-description">
+                        <div class="row mt-6">
+
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="product-tab-additional">
+                        <ul class="list-none">
+                            {% for feature in product.features.all %}
+                            <li>
+                                <label>{{ feature.name }}:</label>
+                                <p>{{ feature.value }} گرم</p>
+                            </li>
+                            {% endfor %}
+                            
+                           
+                        </ul>
+                    </div>
+                    <div class="tab-pane " id="product-tab-shipping-returns">
+                        <h6 class="mb-2">ارسال رایگان و مرجوعی </h6>
+                        <p class="mb-0">
+                            ما بیش از 100 نمایندگی در سراسر استان داریم و حمل نقل از تمامی نمایندگی ها ما رایگان است برای اطلاعات بیستر  <a href="#"
+                                                                                                                                            class="text-primary">
+                                اطلاعات تحویل
+                            </a>را مطالعه بفرمایید .
+                            مرجعوعی کالا در سراسر نمایندگی ما امکان پذیر است با مطالعه
+                            <a href="#"
+                               class="text-primary">اطلاعات مرجوعی </a> از شرایط آن مطلع شوید.
+                        </p>
+                    </div>
+                    <div class="tab-pane " id="product-tab-reviews">
+                        <div class="row">
+                            <div class="col-lg-4 mb-6">
+                                <div class="avg-rating-container">
+                                    <mark>5.0</mark>
+                                    <div class="avg-rating">
+                                        <span class="avg-rating-title">میانگین امتیاز</span>
+                                        <div class="ratings-container mb-0">
+                                            <div class="ratings-full">
+                                                <span class="ratings" style="width:100%"></span>
+                                                <span class="tooltiptext tooltip-top"></span>
+                                            </div>
+                                            <span class="rating-reviews">(از 27 نظر)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ratings-list mb-2">
+                                    <div class="ratings-item">
+                                        <div class="ratings-container mb-0">
+                                            <div class="ratings-full">
+                                                <span class="ratings" style="width:100%"></span>
+                                                <span class="tooltiptext tooltip-top"></span>
+                                            </div>
+                                        </div>
+                                        <div class="rating-percent">
+                                            <span style="width:100%;"></span>
+                                        </div>
+                                        <div class="progress-value">100%</div>
+                                    </div>
+                                    <div class="ratings-item">
+                                        <div class="ratings-container mb-0">
+                                            <div class="ratings-full">
+                                                <span class="ratings" style="width:80%"></span>
+                                                <span class="tooltiptext tooltip-top">4.000 </span>
+                                            </div>
+                                        </div>
+                                        <div class="rating-percent">
+                                            <span style="width:0%;"></span>
+                                        </div>
+                                        <div class="progress-value">0%</div>
+                                    </div>
+                                    <div class="ratings-item">
+                                        <div class="ratings-container mb-0">
+                                            <div class="ratings-full">
+                                                <span class="ratings" style="width:60%"></span>
+                                                <span class="tooltiptext tooltip-top">4.000 </span>
+                                            </div>
+                                        </div>
+                                        <div class="rating-percent">
+                                            <span style="width:0%;"></span>
+                                        </div>
+                                        <div class="progress-value">0%</div>
+                                    </div>
+                                    <div class="ratings-item">
+                                        <div class="ratings-container mb-0">
+                                            <div class="ratings-full">
+                                                <span class="ratings" style="width:40%"></span>
+                                                <span class="tooltiptext tooltip-top">4.000 </span>
+                                            </div>
+                                        </div>
+                                        <div class="rating-percent">
+                                            <span style="width:0%;"></span>
+                                        </div>
+                                        <div class="progress-value">0%</div>
+                                    </div>
+                                    <div class="ratings-item">
+                                        <div class="ratings-container mb-0">
+                                            <div class="ratings-full">
+                                                <span class="ratings" style="width:20%"></span>
+                                                <span class="tooltiptext tooltip-top">4.000 </span>
+                                            </div>
+                                        </div>
+                                        <div class="rating-percent">
+                                            <span style="width:0%;"></span>
+                                        </div>
+                                        <div class="progress-value">0%</div>
+                                    </div>
+                                </div>
+                                <a class="btn btn-dark btn-rounded submit-review-toggle" href="#">
+                                    ارسال
+                                    بررسی ها
+                                </a>
+                            </div>
+                            <div class="col-lg-8 comments pt-2 pb-10 border-no">
+                                <nav class="toolbox">
+                                    <div class="toolbox-right">
+                                        <div class="toolbox-item">
+                                            <a href="#" class="btn btn-outline btn-rounded">همه  بازدید </a>
+                                        </div>
+                                        <div class="toolbox-item">
+                                            <a href="#" class="btn btn-outline btn-rounded">با  عکس</a>
+                                        </div>
+                                        <div class="toolbox-item">
+                                            <a href="#" class="btn btn-outline btn-rounded">با  ویدیوها</a>
+                                        </div>
+                                    </div>
+                                    <div class="toolbox-left ">
+                                        <div class="toolbox-item toolbox-sort select-box text-dark">
+                                            <label>مرتب شود با  :</label>
+                                            <select name="orderby" class="form-control">
+                                                <option value="">پیش فرض</option>
+                                                <option value="newest" selected="selected">
+                                                    جدیدترین ها
+                                                </option>
+                                                <option value="oldest">آخرین بازدید </option>
+                                                <option value="high_rate"> بالاترین رتبه</option>
+                                                <option value="low_rate"> کمترین رتبه</option>
+                                                <option value="most_likely"> بیشترین لایک </option>
+                                                <option value="most_unlikely"> بیشترین آنلایک </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </nav>
+                                <ul class="comments-list">
+                                    <li>
+                                        <div class="comment">
+                                            <figure class="comment-media">
+                                                <a href="#">
+                                                    <img src="images/blog/comments/2.jpg" alt="avatar">
+                                                </a>
+                                            </figure>
+                                            <div class="comment-body">
+                                                <div class="comment-rating ratings-container">
+                                                    <div class="ratings-full">
+                                                        <span class="ratings" style="width:100%"></span>
+                                                        <span class="tooltiptext tooltip-top"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="comment-user">
+                                                    <span class="comment-date">
+                                                        نویسنده :   <span class="font-weight-semi-bold text-uppercase text-dark">
+                                                             افسون هاشمی
+                                                        </span> در
+                                                        <span class="font-weight-semi-bold text-dark">
+                                                            2 آبان 1402
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div class="comment-content mb-5">
+                                                    <p>
+                                                        بسیار خوب که این محصول را انتخاب کردم! کیفیت بسیار بالا و قابل توجه است. بسته‌بندی محکم و ارسال سریع نیز از دقت و حرفه‌ای بودن شما خبر می‌دهد.
+                                                    </p>
+                                                </div>
+                                                <div class="file-input-wrappers">
+                                                    <img class="btn-play btn-img pwsp"
+                                                         src="images/products/product1.jpg" width="280"
+                                                         height="315" alt="product" />
+                                                    <img class="btn-play btn-img pwsp"
+                                                         src="images/products/product3.jpg" width="280"
+                                                         height="315" alt="product" />
+                                                    <a class="btn-play btn-iframe"
+                                                       style="background-image: url(images/product/product.jpg);background-size: cover;"
+                                                       href="video/memory-of-a-woman.mp4">
+                                                        <i class="d-icon-play-solid"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="feeling mt-5">
+                                                    <button class="btn btn-link btn-icon-left btn-slide-up btn-infinite like ml-2">
+                                                        <i class="fa fa-thumbs-up"></i>
+                                                        لایک (<span class="count">0</span>)
+                                                    </button>
+                                                    <button class="btn btn-link btn-icon-left btn-slide-down btn-infinite unlike">
+                                                        <i class="fa fa-thumbs-down"></i>
+                                                        آنلایک (<span class="count">0</span>)
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment">
+                                            <figure class="comment-media">
+                                                <a href="#">
+                                                    <img src="images/blog/comments/1.jpg" alt="avatar">
+                                                </a>
+                                            </figure>
+                                            <div class="comment-body">
+                                                <div class="comment-rating ratings-container">
+                                                    <div class="ratings-full">
+                                                        <span class="ratings" style="width:100%"></span>
+                                                        <span class="tooltiptext tooltip-top"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="comment-user">
+                                                    <span class="comment-date">
+                                                        نویسنده :   <span class="font-weight-semi-bold text-uppercase text-dark">
+                                                             افسون هاشمی
+                                                        </span> در
+                                                        <span class="font-weight-semi-bold text-dark">
+                                                            2 آبان 1402
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div class="comment-content">
+                                                    <p>
+                                                        بسیار خوب که این محصول را انتخاب کردم! کیفیت بسیار بالا و قابل توجه است. بسته‌بندی محکم و ارسال سریع نیز از دقت و حرفه‌ای بودن شما خبر می‌دهد.
+                                                    </p>
+                                                </div>
+                                                <div class="feeling mt-5">
+                                                    <button class="btn btn-link btn-icon-left btn-slide-up btn-infinite like ml-2">
+                                                        <i class="fa fa-thumbs-up"></i>
+                                                        لایک (<span class="count">0</span>)
+                                                    </button>
+                                                    <button class="btn btn-link btn-icon-left btn-slide-down btn-infinite unlike">
+                                                        <i class="fa fa-thumbs-down"></i>
+                                                        آنلایک (<span class="count">0</span>)
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <nav class="toolbox toolbox-pagination justify-content-end">
+                                    <ul class="pagination">
+                                        <li class="page-item disabled">
+                                            <a class="page-link page-link-prev" href="#" aria-label="Previous"
+                                               tabindex="-1" aria-disabled="true">
+                                                <i class="d-icon-arrow-right"></i>قبلی
+                                            </a>
+                                        </li>
+                                        <li class="page-item active" aria-current="page">
+                                            <a class="page-link"
+                                               href="#">1</a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item page-item-dots">
+                                            <a class="page-link" href="#">6</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link page-link-next" href="#" aria-label="Next">
+                                                بعدی <i class="d-icon-arrow-left"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <!-- End Comment  -->
+                        <div class="review-form-section">
+                            <div class="review-overlay"></div>
+                            <div class="review-form-wrapper">
+                                <div class="title-wrapper text-right">
+                                    <h3 class="title title-simple text-right text-normal">انتخاب امتیاز </h3>
+                                    <p>
+                                        فیلد های ستاره دار الزامی هستند .   *
+                                    </p>
+                                </div>
+                                <div class="rating-form">
+                                    <label for="rating" class="text-dark">امتیاز شما* </label>
+                                    <span class="rating-stars selected">
+                                        <a class="star-1" href="#">1</a>
+                                        <a class="star-2" href="#">2</a>
+                                        <a class="star-3" href="#">3</a>
+                                        <a class="star-4 active" href="#">4</a>
+                                        <a class="star-5" href="#">5</a>
+                                    </span>
+                                    <select name="rating" id="rating" required="" style="display: none;">
+                                        <option value="">رتبه…</option>
+                                        <option value="5">عالی</option>
+                                        <option value="4">خوب</option>
+                                        <option value="3">متوسط</option>
+                                        <option value="2">بد نیست</option>
+                                        <option value="1">خیلی ضعیف</option>
+                                    </select>
+                                </div>
+                                <form action="#">
+                                    <textarea id="reply-message" cols="30" rows="6" class="form-control mb-4"
+                                              placeholder="پیام*" required></textarea>
+                                    <div class="review-medias">
+                                        <div class="file-input form-control image-input"
+                                             style="background-image: url(images/product/placeholder.png);">
+                                            <div class="file-input-wrapper">
+                                            </div>
+                                            <label class="btn-action btn-upload" title="Upload Media">
+                                                <input type="file" accept=".png, .jpg, .jpeg"
+                                                       name="riode_comment_medias_image_1">
+                                            </label>
+                                            <label class="btn-action btn-remove" title="Remove Media">
+                                            </label>
+                                        </div>
+                                        <div class="file-input form-control image-input"
+                                             style="background-image: url(images/product/placeholder.png);">
+                                            <div class="file-input-wrapper">
+                                            </div>
+                                            <label class=" btn-action btn-upload" title="Upload Media">
+                                                <input type="file" accept=".png, .jpg, .jpeg"
+                                                       name="riode_comment_medias_image_2">
+                                            </label>
+                                            <label class="btn-action btn-remove" title="Remove Media">
+                                            </label>
+                                        </div>
+                                        <div class="file-input form-control video-input"
+                                             style="background-image: url(images/product/placeholder.png);">
+                                            <video class="file-input-wrapper" controls=""></video>
+                                            <label class="btn-action btn-upload" title="Upload Media">
+                                                <input type="file" accept=".avi, .mp4"
+                                                       name="riode_comment_medias_video_1">
+                                            </label>
+                                            <label class="btn-action btn-remove" title="Remove Media">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <p> آپلود تصاویر و ویدیوها. حداکثر تعداد: 3، حجم: 2MB</p>
+                                    <button type="submit" class="btn btn-primary btn-rounded">
+                                        ارسال<i class="d-icon-arrow-left"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- End Reply -->
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</main>
+<!-- End Main -->
+
+
+{% endblock content %}
